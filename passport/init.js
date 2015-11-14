@@ -5,7 +5,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var fbConfig = {
   'clientID' : '934929516578701',
   'clientSecret' : 'ab1fdd34b94a4e1c71067479b8311c80',
-  'callbackURL' : 'http://localhost:3000/login/facebook/callback',
+  'callbackURL' : 'http://IP:3000/login/facebook/callback',
   profileFields: ['id', 'email', 'first_name', 'gender', 'last_name', 'likes.limit(100){category,name,id}']
 };
 
@@ -87,7 +87,7 @@ module.exports = function(passport){
           }
           
           //save likes to database
-          if('next' in likes_obj.paging){
+          if('paging' in likes_obj && 'next' in likes_obj.paging){
             najax(likes_obj.paging.next, loadPageCallback);
           }else{
 

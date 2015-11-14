@@ -7,5 +7,5 @@ module.exports = mongoose.model('User', {
   firstName: String,
   lastName: String,
   email: String,
-  likes: [Number]
+  likes: [String]
 });

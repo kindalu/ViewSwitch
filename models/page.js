@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-module.exports = mongoose.model('Pages', {
+module.exports = mongoose.model('Page', {
   id: String,
   name: String,
   category: String,

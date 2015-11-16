@@ -1,17 +1,15 @@
-# fb-hack-2015
+# ViewSwitch
 
-This project is for connecting people from diffent background. 
-Help people to extend their comfort zone and increase their empathy in a easy way.
-comfort zone -> learning zone -> panic zone.
+ViewSwitch originated from facebook hackathon 2015 in Taipei. We believe a lot of issues in this world comes from people only see things in their perspective, lacking the empathy and the understanding of the others. This project want to connect people from diffent background with similiar interests, sharing their viewpoint with strangers. Help people to extend their comfort zone and increase their empathy by bringing them to their learning zone. ( comfort zone -> learning zone -> panic zone )
 
 
 # Todos
 - [x] Fetch the user likes data from Facebook
-- [ ] Help user to organize their pages in groups
-- [ ] Show indivitial feeds for each group
-- [ ] For each user, try to find anonymous partners to extend comfort zone.
-- [ ] The anonymous partners have a similar set of likes, but not too similar.
-- [ ] Let the user and partners form a group, let then do some interaction, and change "Viewpoint".
+- [ ] List all the pages in groups
+- [ ] Show feeds for each group
+- [ ] Support custom page group
+- [ ] For each user, try to find suitable and anonymous partners to extend their comfort zone. The anonymous partners have a similar set of likes, but not too similar.
+- [ ] Let the user and partners form a lasting user-group, let then do some interaction, and exchange "Viewpoint".
 
 # LOG
 

@@ -14,5 +14,5 @@ comfort zone -> learning zone -> panic zone.
 
 # LOG
 
-* 2015/11/16: 100 days of github push chanllenge.
+* 2015/11/16: start 100 days of github push chanllenge.
 * 2015/11/14: support auth and fetch user likes from facebook @ FB hackathan

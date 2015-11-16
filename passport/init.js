@@ -3,33 +3,33 @@ var Page = require('../models/page');
 var najax = require('najax');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var fbConfig = {
-  'clientID' : '934929516578701',
-  'clientSecret' : 'ab1fdd34b94a4e1c71067479b8311c80',
+  'clientID' : 'Your Facebook App ID',
+  'clientSecret' : 'Your Facebook App Secret',
   'callbackURL' : 'http://localhost:3000/login/facebook/callback',
   profileFields: ['id', 'email', 'first_name', 'gender', 'last_name', 'likes.limit(100){id, category, name, about, link, picture.type(large)}']
 };
 
 var savePageToDB = function (page){
   //console.log('this is page:', page);
-  
+
   Page.findOne({ 'id' : page.id }, function(dbErr, pageFound) {
 
     if (dbErr){
       console.log('find page by id dbErr');
       return done(dbErr);
     }
-    
+
     if (pageFound) {
       // user found, return that user
       console.log('found page ' + page.name);
-      //return done(null, pageFound); 
+      //return done(null, pageFound);
       return;
     } else {
       // user not found create new user
       var newPage = new Page();
 
-      newPage.id = page.id;              
-      newPage.name = page.name;             
+      newPage.id = page.id;
+      newPage.name = page.name;
       newPage.category  = page.category;
       newPage.about  = page.about;
       newPage.link  = page.link;
@@ -83,12 +83,12 @@ module.exports = function(passport){
           var likes_obj = JSON.parse(res);
           //found pages
           for(var key in likes_obj.data){
-            
+
             UserPageIds.push(likes_obj.data[key].id);
-            
+
             savePageToDB(likes_obj.data[key]);
           }
-          
+
           //save likes to database
           if('paging' in likes_obj && 'next' in likes_obj.paging){
             najax(likes_obj.paging.next, loadPageCallback);
@@ -114,28 +114,28 @@ module.exports = function(passport){
 
       // asynchronous
       process.nextTick(function() {
-        
+
         // find the user in the database based on their facebook id
         User.findOne({ 'id' : profile.id }, function(dbErr, user) {
 
 
           if (dbErr)
             return done(dbErr);
-          
+
           if (user) {
             // user found, return that user
             console.log('found return user ' + profile.id);
-            return done(null, user); 
+            return done(null, user);
 
           } else {
             // user not found create new user
             var newUser = new User();
 
-            newUser.id = profile.id;              
-            newUser.access_token = access_token;             
+            newUser.id = profile.id;
+            newUser.access_token = access_token;
             newUser.firstName  = profile.name.givenName;
             newUser.lastName = profile.name.familyName;
-            newUser.email = profile.emails[0].value;   
+            newUser.email = profile.emails[0].value;
 
             // save to the database
             newUser.save(function(dbErr) {
@@ -152,7 +152,7 @@ module.exports = function(passport){
                 UserPageIds.push(profile_obj.likes.data[key].id);
                 savePageToDB( profile_obj.likes.data[key]);
               }
-              
+
               //fetch next pages
               if('next' in profile_obj.likes.paging){
                 najax(profile_obj.likes.paging.next, loadPageCallback);

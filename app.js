@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var dbConfig = { 'url' : 'mongodb://IP:27017/fb-hack-test' };
+var dbConfig = { 'url' : 'mongodb://localhost:27017/fb-hack-test' };
 var mongoose = require('mongoose');
 // Connect to DB
 mongoose.connect(dbConfig.url);

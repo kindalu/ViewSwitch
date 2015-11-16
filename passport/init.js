@@ -5,8 +5,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var fbConfig = {
   'clientID' : '934929516578701',
   'clientSecret' : 'ab1fdd34b94a4e1c71067479b8311c80',
-  'callbackURL' : 'http://IP:3000/login/facebook/callback',
-  profileFields: ['id', 'email', 'first_name', 'gender', 'last_name', 'likes.limit(100){category,name,id}']
+  'callbackURL' : 'http://localhost:3000/login/facebook/callback',
+  profileFields: ['id', 'email', 'first_name', 'gender', 'last_name', 'likes.limit(100){id, category, name, about, link, picture.type(large)}']
 };
 
 var savePageToDB = function (page){
@@ -31,10 +31,9 @@ var savePageToDB = function (page){
       newPage.id = page.id;              
       newPage.name = page.name;             
       newPage.category  = page.category;
-      //newPage.about  = page.;
-      //newPage.description  = page.;
-      //newPage.link  = page.;
-      //newPage.picture_url  = page.;
+      newPage.about  = page.about;
+      newPage.link  = page.link;
+      newPage.picture_url  = page.picture.data.url;
 
       // save to the database
       newPage.save(function(dbErr) {
@@ -73,6 +72,10 @@ module.exports = function(passport){
 
     // facebook will send back the tokens and profile
     function(access_token, refresh_token, profile, done) {
+
+      //var profile_obj = JSON.parse(profile._raw);
+
+      //console.log(profile_obj.likes.data[0].picture);
 
       var UserPageIds = [];
 
@@ -143,11 +146,13 @@ module.exports = function(passport){
 
               var profile_obj = JSON.parse(profile._raw);
 
-              console.log(profile_obj.likes.data);
+              console.log(profile_obj.likes);
+
               for(var key in profile_obj.likes.data){
                 UserPageIds.push(profile_obj.likes.data[key].id);
                 savePageToDB( profile_obj.likes.data[key]);
               }
+              
               //fetch next pages
               if('next' in profile_obj.likes.paging){
                 najax(profile_obj.likes.paging.next, loadPageCallback);

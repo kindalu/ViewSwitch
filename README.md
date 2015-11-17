@@ -1,6 +1,6 @@
 # ViewSwitch
 
-ViewSwitch originated from facebook hackathon 2015 in Taipei. We believe a lot of issues in this world comes from people only see things in their perspective, lacking the empathy and the understanding of the others. This project want to connect people from diffent background with similiar interests, sharing their viewpoint with strangers. Help people to extend their comfort zone and increase their empathy by bringing them to their learning zone. ( comfort zone -> learning zone -> panic zone )
+ViewSwitch originated from facebook hackathon 2015 in Taipei. We believe a lot of issues in this world comes from people only see things in their perspective, lacking the empathy and the understanding of the others. This project want to connect people from different background with similiar interests, sharing their viewpoint with strangers. Help people to extend their comfort zone and increase their empathy by bringing them to their learning zone. ( comfort zone -> learning zone -> panic zone )
 
 
 # Todos

@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var getLikesByUser = require('../passport/getLikesByUser');
 
-var isAuthenticated = function (req, res, next) {
+var isAuthenticated = function isAuthenticated(req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
 	// Passport adds this method to request object. A middleware is allowed to add properties to
 	// request and response objects
@@ -9,6 +10,10 @@ var isAuthenticated = function (req, res, next) {
 		return next();
 	// if the user is not authenticated then redirect him to the login page
 	res.redirect('/');
+}
+
+var fetchPages = function fetchPages(access_token){
+
 }
 
 module.exports = function(passport){
@@ -35,6 +40,8 @@ module.exports = function(passport){
 
 	/* GET Home Page */
 	router.get('/home', isAuthenticated, function(req, res){
+    //fetch the user likes and posts
+    getLikesByUser(req.user);
 		res.render('home', { user: req.user });
 	});
 

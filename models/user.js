@@ -6,6 +6,7 @@ module.exports = mongoose.model('User', {
   access_token: String,
   firstName: String,
   lastName: String,
+  gender: String,
   email: String,
   likes: [String]
 });

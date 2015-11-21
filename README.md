@@ -5,6 +5,9 @@ ViewSwitch originated from facebook hackathon 2015 in Taipei. We believe a lot o
 
 # Todos
 - [x] Fetch the user likes data from Facebook
+- [ ] Migrate to ES2015, introduce webpack, babel, gulp
+- [ ] Set up react for UI develop
+- [ ] Draw state chart and Page Component Hierarchy 
 - [ ] List all the pages in groups
 - [ ] Show feeds for each group
 - [ ] Support custom page group

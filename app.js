@@ -85,4 +85,10 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+app.listen(3000, function (err) {
+  if(err){
+    console.log(err);
+  }else{
+    console.log('now listen to http://localhost:3000/');
+  }
+});

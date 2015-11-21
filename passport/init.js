@@ -41,11 +41,10 @@ var facebookStrategy = new FacebookStrategy(
         if (dbErr) throw dbErr;
 
         if (!user) {
-          return done(null, user);
-        } else {
           var newUser = addNewUserToDB(profile, access_token);
           return done(null, newUser);
         }
+        return done(null, user);
 
       });
 

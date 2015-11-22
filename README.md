@@ -7,8 +7,9 @@ ViewSwitch originated from facebook hackathon 2015 in Taipei. We believe a lot o
 
 # Todos
 - [x] Fetch the user likes data from Facebook
+- [ ] Separate the server code and client code
 - [ ] Introduce webpack, babel, gulp
-- [ ] Migrate code to ES2015 
+- [ ] Migrate client code to ES2015 (Client = ES6 + React, Server = CommonJS) 
 - [ ] Set up react for UI develop
 - [ ] Draw the design/issue tree
 - [ ] Draw state chart and Page Component Hierarchy 

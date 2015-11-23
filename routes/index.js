@@ -17,7 +17,7 @@ module.exports = function(passport) {
   /* GET login page. */
   router.get('/', function(req, res) {
     // Display the Login page with any flash message, if any
-    res.render('index', {
+    res.render('index.html', {
       message: req.flash('message')
     });
   });
@@ -41,7 +41,7 @@ module.exports = function(passport) {
   router.get('/home', isAuthenticated, function(req, res) {
     //fetch the user likes and posts
     getLikesByUser(req.user);
-    res.render('home', {
+    res.render('home.html', {
       user: req.user
     });
   });

@@ -27,7 +27,8 @@ module.exports = function(passport) {
   router.get('/login/facebook',
     passport.authenticate('facebook', {
       scope: ['email', 'user_likes']
-    }));
+    })
+  );
 
   // handle the callback after facebook has authenticated the user
   router.get('/login/facebook/callback',
@@ -38,17 +39,33 @@ module.exports = function(passport) {
   );
 
   /* GET Home Page */
-  router.get('/home', isAuthenticated, function(req, res) {
+  router.get('/home', isAuthenticated, function(req, res, next) {
+
     //fetch the user likes and posts
-    getLikesByUser(req.user);
+    getLikesByUser(req.user, function(userLikes) {
+      res.locals.data =  {
+        userLikes: userLikes
+      };
+      next();
+    });
+
+  });
+
+  router.get('/home', isAuthenticated, function(req, res) {
     res.render('home.html', {
-      user: req.user
+      user: req.user,
+      likes: res.locals.data.userLikes
     });
   });
 
   /* Handle Logout */
   router.get('/signout', function(req, res) {
     req.logout();
+    res.redirect('/');
+  });
+
+  /* Handle Not Found */
+  router.get('*', function(req, res) {
     res.redirect('/');
   });
 

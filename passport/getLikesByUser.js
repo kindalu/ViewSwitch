@@ -1,5 +1,5 @@
-var Page = require('../models/page');
 var graph = require('fbgraph');
+var Page = require('../models/page');
 
 var savePageToDB = function(page) {
 
@@ -60,9 +60,12 @@ var savePageToDB = function(page) {
 
 }
 
-module.exports = function getLikesByUser(user) {
+module.exports = function getLikesByUser(user, saveLikesCallback) {
 
-  var processLikesResponse = function(err, res) {
+  var userPageIds = [];
+  var userLikes = [];
+
+  var processLikesResponse = function processLikesResponse(err, res) {
     var likes;
     if ('likes' in res)
       likes = res.likes; //first call
@@ -71,7 +74,8 @@ module.exports = function getLikesByUser(user) {
 
     for (var key in likes.data) {
 
-      UserPageIds.push(likes.data[key].id);
+      userPageIds.push(likes.data[key].id);
+      userLikes.push(likes.data[key]);
       savePageToDB(likes.data[key]);
     }
 
@@ -79,19 +83,19 @@ module.exports = function getLikesByUser(user) {
       graph.get(likes.paging.next, processLikesResponse);
     } else {
 
-      user.likes = UserPageIds;
+      user.likes = userPageIds;
       user.save(function(dbErr) {
         if (dbErr) {
           console.log('update new user likes fail!!!');
           throw dbErr;
         }
 
-        console.log('(' + user.firstName + ' ' + user.lastName + ')\'s ' + UserPageIds.length + ' likes updated');
+        console.log('(' + user.firstName + ' ' + user.lastName + ')\'s ' + userPageIds.length + ' likes updated');
+        saveLikesCallback(userLikes);
       });
     }
+    
   }
-
-  var UserPageIds = [];
 
   graph.setAccessToken(user.access_token);
   var options = {
